@@ -2,7 +2,6 @@ package com.example.shelta.presentation.welcome.components
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,18 +27,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.shelta.R
 import com.example.shelta.presentation.auth.login.components.CustomButton
-import com.example.shelta.presentation.ui.theme.Blue
-import com.example.shelta.presentation.ui.theme.Red
 import com.example.shelta.presentation.uievent.UiEvent
 import com.example.shelta.presentation.welcome.WelcomeScreenEvents
 import com.example.shelta.presentation.welcome.WelcomeScreenViewModel
@@ -49,8 +44,8 @@ import com.example.shelta.presentation.welcome.WelcomeScreenViewModel
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun WelcomeScreen(
-        onNavigate: (UiEvent.OnNavigate) -> Unit,
-        viewModel: WelcomeScreenViewModel = hiltViewModel()
+    onNavigate: (UiEvent.OnNavigate) -> Unit,
+    viewModel: WelcomeScreenViewModel = hiltViewModel()
 ) {
     LaunchedEffect(key1 = true){
         viewModel.uiEvent.collect{
@@ -73,8 +68,14 @@ fun WelcomeScreen(
                     .fillMaxSize()
                     .padding(10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween
+                verticalArrangement = Arrangement.SpaceAround
             ) {
+                Text(
+                    textAlign = TextAlign.Start,
+                    text = "Explore collect \n \nSell more artwork",
+                    fontSize = 40.sp,
+                    fontFamily = FontFamily.Monospace
+                )
                 Card(
                     modifier = Modifier
                         .clip(RoundedCornerShape(30.dp))
@@ -86,13 +87,7 @@ fun WelcomeScreen(
                         painter = painterResource(id = R.drawable.welcome),
                         contentDescription = "logo")
                 }
-                Text(
-                    textAlign = TextAlign.Center,
-                    text = "Fostering cyber security \n capacity",
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                CustomButton(text = "Register") {
+                CustomButton(text = "Get started") {
                     viewModel.onEvent(WelcomeScreenEvents.OnRegisterClicked)
                 }
                 Row() {
@@ -108,12 +103,6 @@ fun WelcomeScreen(
                         color = MaterialTheme.colorScheme.primary,
                     )
                 }
-                Text(
-                    text = "Enter the MATRIX",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp
-                )
-                Spacer(modifier = Modifier.height(20.dp))
             }
         }
     }
