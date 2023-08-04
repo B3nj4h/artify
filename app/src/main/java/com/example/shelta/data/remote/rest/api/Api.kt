@@ -66,4 +66,9 @@ interface Api {
     suspend fun getArtWorkDetails(
         @Path("id") id: Int,
     ): ArtDto
+
+    @GET("artwork/{name}")
+    suspend fun getArtWorkByName(
+        @Path("name") name: String,
+    ): List<ArtDto>
 }

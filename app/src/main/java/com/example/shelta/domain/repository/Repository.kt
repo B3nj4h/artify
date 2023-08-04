@@ -3,6 +3,7 @@ package com.example.shelta.domain.repository
 import com.example.shelta.common.Message
 import com.example.shelta.data.remote.rest.dto.ArtDto
 import com.example.shelta.data.remote.rest.dto.ProfileUserDto
+import com.example.shelta.domain.model.ArtModel
 import com.example.shelta.domain.model.Feedback
 import com.example.shelta.domain.model.PostArtModel
 import com.example.shelta.domain.model.ResetModel
@@ -22,4 +23,5 @@ interface Repository {
     suspend fun getArtWork(): List<ArtDto>
     suspend fun postArtWork(postArtModel: PostArtModel): Message
     suspend fun getArtWorkDetails(id: Int): ArtDto
+    suspend fun searchArtWork(name: String): List<ArtDto>
 }

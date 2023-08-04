@@ -5,6 +5,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import com.example.shelta.presentation.art_details.components.ArtDetailsScreen
 import com.example.shelta.presentation.auth.forgot_password.components.ForgotPasswordScreen
 import com.example.shelta.presentation.auth.login.components.LoginScreen
 import com.example.shelta.presentation.auth.sign_up.components.SignUpScreen
@@ -136,7 +137,9 @@ fun MainNavGraph(
                     else -> null
                 }
             },
-        ){ MainScreen(onNavigate = { navHostController.navigate(it.route) }) }
+        ){ MainScreen(
+            navHostController,
+            onNavigate = { navHostController.navigate(it.route) }) }
 
         composable(
             route = Screens.ProfileScreen.route,
@@ -259,6 +262,32 @@ fun MainNavGraph(
             }
         ){
             ChangeEmailScreen(onPopBackStack = { navHostController.popBackStack()})
+        }
+
+        composable(
+            route = Screens.ArtWorkDetailsScreen.route + "/{id}",
+            enterTransition = {
+                when (targetState.destination.route) {
+                    navHostController.currentDestination?.route ->
+                        slideIntoContainer(
+                            AnimatedContentScope.SlideDirection.Left,
+                            initialOffset = {0},
+                            animationSpec = tween(300)
+                        )
+                    else -> null
+                }
+            },
+            popExitTransition = {
+                when (targetState.destination.route) {
+                    navHostController.currentDestination?.route ->
+                        slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(1000))
+                    else -> null
+                }
+            }
+        ){
+            ArtDetailsScreen(
+                onPopBackStack = { navHostController.popBackStack() }
+            )
         }
 
 //        composable(

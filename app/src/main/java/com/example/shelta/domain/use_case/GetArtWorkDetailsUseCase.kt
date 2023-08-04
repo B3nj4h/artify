@@ -15,7 +15,7 @@ import javax.inject.Inject
 class GetArtWorkDetailsUseCase @Inject constructor(
     private val repository: Repository
 ) {
-    operator fun invoke(id: String, contact: String): Flow<Resource<ArtModel>> = flow {
+    operator fun invoke(id: String): Flow<Resource<ArtModel>> = flow {
         try {
             emit(Resource.Loading())
             val artWorkDetails = repository.getArtWorkDetails(id.toInt()).toArtModel()
