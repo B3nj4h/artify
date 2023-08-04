@@ -21,4 +21,5 @@ interface Repository {
     suspend fun resetPassword(resetModel: ResetModel): Message
     suspend fun getArtWork(): List<ArtDto>
     suspend fun postArtWork(postArtModel: PostArtModel): Message
+    suspend fun getArtWorkDetails(id: Int): ArtDto
 }

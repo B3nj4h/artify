@@ -52,4 +52,8 @@ class RepositoryImpl @Inject constructor(
     override suspend fun postArtWork(postArtModel: PostArtModel): Message {
         return api.postArtWork(postArtModel)
     }
+
+    override suspend fun getArtWorkDetails(id: Int): ArtDto {
+        return api.getArtWorkDetails(id)
+    }
 }
