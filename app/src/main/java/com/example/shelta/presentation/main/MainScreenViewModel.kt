@@ -51,7 +51,7 @@ class MainScreenViewModel @Inject constructor(
 
     fun onEvent(mainScreenEvents: MainScreenEvents){
         when(mainScreenEvents){
-            is MainScreenEvents.OnUploadClicked -> {
+            is MainScreenEvents.OnSearchClicked -> {
 
             }
             is MainScreenEvents.OnProfileClicked -> {
