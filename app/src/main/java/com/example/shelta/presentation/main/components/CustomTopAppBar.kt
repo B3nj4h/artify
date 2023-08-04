@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.LocationOn
+import androidx.compose.material.icons.rounded.Upload
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,13 +38,20 @@ fun CustomTopAppBar(
             }
         },
         title = {
-            Text(
-                text = "Transguard",
-                color = MaterialTheme.colorScheme.primary
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "Artify",
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
         },
         actions = {
-
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(imageVector = Icons.Rounded.Upload, contentDescription = "upload")
+            }
         }
     )
 }
