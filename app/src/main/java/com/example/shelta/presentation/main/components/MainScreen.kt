@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.shelta.presentation.auth.login.components.CustomTextField
 import com.example.shelta.presentation.main.MainScreenEvents
 import com.example.shelta.presentation.main.MainScreenViewModel
 import com.example.shelta.presentation.screens.Screens
@@ -123,7 +124,14 @@ fun MainScreen(
                 ) {
                     Card {
                         Column {
-                            Image
+                            CustomTextField(
+                                onClick = { /*TODO*/ },
+                                value = ,
+                                onValueChange = ,
+                                leadingIcon = 
+                            ) {
+                                
+                            }
                         }
                     }
                 }

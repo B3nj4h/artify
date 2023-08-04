@@ -7,7 +7,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shelta.common.Resource
+import com.example.shelta.domain.model.PostArtModel
 import com.example.shelta.domain.use_case.GetArtWorkUseCase
+import com.example.shelta.domain.use_case.PostArtWorkUseCase
 import com.example.shelta.presentation.screens.Screens
 import com.example.shelta.presentation.uievent.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
-    private val getArtWorkUseCase: GetArtWorkUseCase
+    private val getArtWorkUseCase: GetArtWorkUseCase,
+    private val postArtWorkUseCase: PostArtWorkUseCase
 ): ViewModel() {
     var isUploadClicked by mutableStateOf(false)
 
@@ -32,6 +35,23 @@ class MainScreenViewModel @Inject constructor(
 
     init {
         getArtWork()
+    }
+
+    fun postArtWork(postArtModel: PostArtModel){
+        postArtWorkUseCase(postArtModel = postArtModel).onEach { result ->
+            when(result){
+                is Resource.Error -> {
+                    _state.value = MainScreenState(message = result.message?:"")
+                    sendUiEvent(UiEvent.ShowToast(result.message?:"unknown error occurred"))
+                }
+                is Resource.Loading -> {
+                    _state.value = MainScreenState(isLoading = true)
+                }
+                is Resource.Success -> {
+                    _state.value = MainScreenState(artModels = result.data ?: emptyList())
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
     fun getArtWork(){
