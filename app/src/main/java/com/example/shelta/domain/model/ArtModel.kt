@@ -7,9 +7,3 @@ data class ArtModel(
     val image_url: String,
     val rating: Int
 )
-
-fun ArtModel.toArtDto(): ArtModel{
-    return ArtModel(
-        name, price, contact, image_url, rating
-    )
-}
