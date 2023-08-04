@@ -313,7 +313,8 @@ fun MainNavGraph(
             }
         ){
             SearchScreen(
-
+                navHostController,
+                onPopBackStack = { navHostController.popBackStack() }
             )
         }
 

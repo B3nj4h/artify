@@ -96,13 +96,13 @@ fun SearchScreen(
     ) {
         Box(modifier = Modifier.fillMaxSize()){
             if(state.isLoading){
-                val lottieCompositionSpec by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(
-                    R.raw.gaming))
-                LottieAnimation(
-                    composition = lottieCompositionSpec,
-                    iterations = Int.MAX_VALUE,
-                    alignment = Alignment.Center
-                )
+//                val lottieCompositionSpec by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(
+//                    R.raw.gaming))
+//                LottieAnimation(
+//                    composition = lottieCompositionSpec,
+//                    iterations = Int.MAX_VALUE,
+//                    alignment = Alignment.Center
+//                )
             } else if (state.message.isNotEmpty()){
                 Button(
                     modifier = Modifier
