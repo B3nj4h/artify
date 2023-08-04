@@ -1,5 +1,6 @@
 package com.example.shelta.presentation.main.components
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -49,6 +50,7 @@ import com.example.shelta.presentation.ui.theme.Red
 import com.example.shelta.presentation.uievent.UiEvent
 import kotlinx.coroutines.flow.collectLatest
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(

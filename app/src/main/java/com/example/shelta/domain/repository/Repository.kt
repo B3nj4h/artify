@@ -1,6 +1,7 @@
 package com.example.shelta.domain.repository
 
 import com.example.shelta.common.Message
+import com.example.shelta.data.remote.rest.dto.ArtDto
 import com.example.shelta.data.remote.rest.dto.ProfileUserDto
 import com.example.shelta.domain.model.Feedback
 import com.example.shelta.domain.model.ResetModel
@@ -17,4 +18,5 @@ interface Repository {
     suspend fun sendFeedback(feedback: Feedback): Message
     suspend fun getUser(): ProfileUserDto
     suspend fun resetPassword(resetModel: ResetModel): Message
+    suspend fun getArtWork(): List<ArtDto>
 }

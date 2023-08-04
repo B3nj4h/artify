@@ -1,6 +1,7 @@
 package com.example.shelta.data.remote.rest.api
 
 import com.example.shelta.common.Message
+import com.example.shelta.data.remote.rest.dto.ArtDto
 import com.example.shelta.data.remote.rest.dto.ProfileUserDto
 import com.example.shelta.domain.model.Feedback
 import com.example.shelta.domain.model.ResetModel
@@ -51,4 +52,7 @@ interface Api {
     suspend fun resetPassword(
         @Body resetModel: ResetModel
     ): Message
+
+    @GET("artwork")
+    suspend fun getArtWork(): List<ArtDto>
 }

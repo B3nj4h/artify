@@ -2,6 +2,7 @@ package com.example.shelta.data.remote.rest.repository
 
 import com.example.shelta.common.Message
 import com.example.shelta.data.remote.rest.api.Api
+import com.example.shelta.data.remote.rest.dto.ArtDto
 import com.example.shelta.data.remote.rest.dto.ProfileUserDto
 import com.example.shelta.domain.model.Feedback
 import com.example.shelta.domain.model.ResetModel
@@ -41,5 +42,9 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun resetPassword(resetModel: ResetModel): Message {
         return api.resetPassword(resetModel)
+    }
+
+    override suspend fun getArtWork(): List<ArtDto> {
+        return api.getArtWork()
     }
 }
