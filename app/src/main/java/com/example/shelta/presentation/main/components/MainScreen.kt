@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.rounded.Upload
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -29,6 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.shelta.presentation.main.MainScreenEvents
@@ -115,6 +117,16 @@ fun MainScreen(
 //                    iterations = Int.MAX_VALUE,
 //                    alignment = Alignment.Center
 //                )
+            } else if (viewModel.isUploadClicked){
+                Dialog(
+                    onDismissRequest = { viewModel.onEvent(MainScreenEvents.OnUploadClicked(false)) }
+                ) {
+                    Card {
+                        Column {
+                            Image
+                        }
+                    }
+                }
             } else {
                 LazyColumn(){
                     item {

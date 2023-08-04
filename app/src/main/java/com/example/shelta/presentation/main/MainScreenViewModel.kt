@@ -1,7 +1,9 @@
 package com.example.shelta.presentation.main
 
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shelta.common.Resource
@@ -20,6 +22,8 @@ import javax.inject.Inject
 class MainScreenViewModel @Inject constructor(
     private val getArtWorkUseCase: GetArtWorkUseCase
 ): ViewModel() {
+    var isUploadClicked by mutableStateOf(false)
+
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
@@ -54,6 +58,9 @@ class MainScreenViewModel @Inject constructor(
             }
             is MainScreenEvents.OnProfileClicked -> {
                 sendUiEvent(UiEvent.OnNavigate(Screens.ProfileScreen.route))
+            }
+            is MainScreenEvents.OnUploadClicked -> {
+                isUploadClicked = mainScreenEvents.onCLick
             }
         }
     }
