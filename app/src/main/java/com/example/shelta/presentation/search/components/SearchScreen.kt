@@ -47,6 +47,10 @@ import androidx.navigation.NavHostController
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.shelta.domain.model.ArtModel
+import com.example.shelta.presentation.main.components.ArtWorkCard
+import com.example.shelta.presentation.screens.Screens
+import com.example.shelta.presentation.search.SearchScreenEvents
 import com.example.shelta.presentation.search.SearchScreenViewModel
 import com.example.shelta.presentation.uievent.UiEvent
 
@@ -82,7 +86,7 @@ fun SearchScreen(
         topBar = {
             SearchBar(
                 scrollBehavior = scrollBehavior,
-                text = viewModel.searchQuery,
+                text = viewModel.name,
                 onTextChange = { viewModel.onEvent(SearchScreenEvents.OnSearchQueryChanged(it))},
                 onCloseClicked = { viewModel.onEvent(SearchScreenEvents.OnBackClicked) },
                 onSearchClicked = { viewModel.onEvent(SearchScreenEvents.OnSearchClicked)},
@@ -117,7 +121,7 @@ fun SearchScreen(
                     ),
                     shape = CircleShape
                     ,
-                    onClick = { viewModel.searchGame() }) {
+                    onClick = {  }) {
                     Icon(
                         tint = MaterialTheme.colorScheme.tertiary,
                         imageVector = Icons.Default.Refresh, contentDescription = "refresh icon")
@@ -134,7 +138,17 @@ fun SearchScreen(
 
                             }
                         }
-                        items() {
+                        items(state.artModels) { artModel ->
+                            ArtWorkCard(
+                                name = artModel.name,
+                                price = artModel.price,
+                                imageUrl = artModel.image_url,
+                                rating = artModel.rating
+                            ) {
+                                navHostController.navigate(
+                                    Screens.ArtWorkDetailsScreen.route + "/${artModel.id}"
+                                )
+                            }
                         }
                         item {
                             Spacer(modifier = Modifier.height(100.dp))

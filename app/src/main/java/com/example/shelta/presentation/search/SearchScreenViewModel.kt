@@ -46,6 +46,11 @@ class SearchScreenViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+    fun resetSearchState(){
+        _state.value = SearchScreenState(artModels = emptyList())
+        name = ""
+    }
+
     fun onEvent(searchScreenEvents: SearchScreenEvents){
         when(searchScreenEvents){
             is SearchScreenEvents.OnSearchClicked -> {
