@@ -55,4 +55,9 @@ interface Api {
 
     @GET("artwork")
     suspend fun getArtWork(): List<ArtDto>
+
+    @POST("artwork")
+    suspend fun postArtWork(
+        @Body artDto: ArtDto
+    ): Message
 }
