@@ -17,6 +17,7 @@ import com.example.shelta.presentation.load.components.LoadScreen
 import com.example.shelta.presentation.main.components.MainScreen
 import com.example.shelta.presentation.profile.components.ProfileScreen
 import com.example.shelta.presentation.screens.Screens
+import com.example.shelta.presentation.search.components.SearchScreen
 import com.example.shelta.presentation.welcome.components.WelcomeScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -287,6 +288,32 @@ fun MainNavGraph(
         ){
             ArtDetailsScreen(
                 onPopBackStack = { navHostController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = Screens.SearchScreen.route,
+            enterTransition = {
+                when (targetState.destination.route) {
+                    navHostController.currentDestination?.route ->
+                        slideIntoContainer(
+                            AnimatedContentScope.SlideDirection.Left,
+                            initialOffset = {0},
+                            animationSpec = tween(300)
+                        )
+                    else -> null
+                }
+            },
+            popExitTransition = {
+                when (targetState.destination.route) {
+                    navHostController.currentDestination?.route ->
+                        slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(1000))
+                    else -> null
+                }
+            }
+        ){
+            SearchScreen(
+
             )
         }
 
