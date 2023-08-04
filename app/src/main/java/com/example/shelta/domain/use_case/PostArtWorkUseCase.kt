@@ -17,7 +17,7 @@ class PostArtWorkUseCase @Inject constructor(
     operator fun invoke(postArtModel: PostArtModel): Flow<Resource<Message>> = flow {
         try {
             emit(Resource.Loading())
-            val message = repository
+            val message = repository.postArtWork(postArtModel)
             emit(Resource.Success(message))
         } catch (e: HttpException){
             emit(Resource.Error(e.localizedMessage ?: "Unexpected error occurred"))

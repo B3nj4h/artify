@@ -4,6 +4,7 @@ import com.example.shelta.common.Message
 import com.example.shelta.data.remote.rest.dto.ArtDto
 import com.example.shelta.data.remote.rest.dto.ProfileUserDto
 import com.example.shelta.domain.model.Feedback
+import com.example.shelta.domain.model.PostArtModel
 import com.example.shelta.domain.model.ResetModel
 import com.example.shelta.domain.model.UpdateContact
 import com.example.shelta.domain.model.UpdateEmail
@@ -58,6 +59,11 @@ interface Api {
 
     @POST("artwork")
     suspend fun postArtWork(
-        @Body artDto: ArtDto
+        @Body postArtModel: PostArtModel
     ): Message
+
+    @GET("artwork/{id}")
+    suspend fun getArtWorkDetails(
+        @Path("id") id: Int,
+    ): ArtDto
 }

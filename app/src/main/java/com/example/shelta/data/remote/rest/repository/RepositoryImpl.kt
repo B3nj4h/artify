@@ -5,6 +5,7 @@ import com.example.shelta.data.remote.rest.api.Api
 import com.example.shelta.data.remote.rest.dto.ArtDto
 import com.example.shelta.data.remote.rest.dto.ProfileUserDto
 import com.example.shelta.domain.model.Feedback
+import com.example.shelta.domain.model.PostArtModel
 import com.example.shelta.domain.model.ResetModel
 import com.example.shelta.domain.model.UpdateContact
 import com.example.shelta.domain.model.UpdateEmail
@@ -46,5 +47,9 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getArtWork(): List<ArtDto> {
         return api.getArtWork()
+    }
+
+    override suspend fun postArtWork(postArtModel: PostArtModel): Message {
+        return api.postArtWork(postArtModel)
     }
 }
