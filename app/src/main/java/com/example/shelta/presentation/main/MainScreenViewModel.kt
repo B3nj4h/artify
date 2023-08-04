@@ -5,10 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shelta.common.Resource
-import com.example.shelta.domain.model.Feedback
 import com.example.shelta.domain.use_case.GetArtWorkUseCase
 import com.example.shelta.presentation.screens.Screens
-import com.example.shelta.presentation.send_feedback.SendFeedbackState
 import com.example.shelta.presentation.uievent.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -52,7 +50,7 @@ class MainScreenViewModel @Inject constructor(
     fun onEvent(mainScreenEvents: MainScreenEvents){
         when(mainScreenEvents){
             is MainScreenEvents.OnSearchClicked -> {
-
+                sendUiEvent(UiEvent.OnNavigate(Screens.SearchScreen.route))
             }
             is MainScreenEvents.OnProfileClicked -> {
                 sendUiEvent(UiEvent.OnNavigate(Screens.ProfileScreen.route))
