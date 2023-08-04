@@ -104,13 +104,13 @@ fun MainScreen(
                     )
                 }
             } else if (artModels.isLoading){
-                val lottieCompositionSpec by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(
-                    com.example.kinetic.R.raw.gaming))
-                LottieAnimation(
-                    composition = lottieCompositionSpec,
-                    iterations = Int.MAX_VALUE,
-                    alignment = Alignment.Center
-                )
+//                val lottieCompositionSpec by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(
+//                    com.example.kinetic.R.raw.gaming))
+//                LottieAnimation(
+//                    composition = lottieCompositionSpec,
+//                    iterations = Int.MAX_VALUE,
+//                    alignment = Alignment.Center
+//                )
             } else {
                 LazyColumn(){
                     item {
