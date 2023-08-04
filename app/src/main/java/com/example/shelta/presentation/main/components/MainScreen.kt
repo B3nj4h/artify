@@ -87,7 +87,8 @@ fun MainScreen(
     Scaffold(
         topBar = {
             CustomTopAppBar(
-                onMenuClicked = {viewModel.onEvent(MainScreenEvents.OnProfileClicked)}
+                onMenuClicked = {viewModel.onEvent(MainScreenEvents.OnProfileClicked)},
+                onSearchClicked = { viewModel.onEvent(MainScreenEvents.OnSearchClicked)}
             )
         }
     ){
