@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.rounded.Upload
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -93,6 +94,7 @@ fun MainScreen(
         }
     }
 
+
     LaunchedEffect(key1 = true){
         sendViewModel.uiEvent.collectLatest{ event ->
             when(event){
@@ -138,38 +140,42 @@ fun MainScreen(
                     Dialog(
                         onDismissRequest = { viewModel.onEvent(MainScreenEvents.OnUploadClicked(false)) }
                     ) {
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(700.dp)
-                                .padding(20.dp)
-                            ,
-                        ) {
-                            if (selectedImageUri != null){
-                                CustomButton(text = "Upload image") {
-                                    viewModel.onEvent(MainScreenEvents.OnPostArtWorkClicked(selectedImageUri))
-                                }
-                            } else {
-                                CustomButton(text = "Pick image") {
-                                    photoPickerLauncher.launch(
-                                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                                    )
-                                }
-                            }
-                            AsyncImage(
+                        if (viewModel.postArtWorkState.value.isLoading){
+                            CircularProgressIndicator()
+                        } else {
+                            Card(
                                 modifier = Modifier
-                                    .padding(16.dp)
-                                    .clip(RoundedCornerShape(16.dp))
+                                    .fillMaxWidth()
+                                    .height(700.dp)
+                                    .padding(20.dp)
                                 ,
-                                model = selectedImageUri,
-                                contentScale = ContentScale.Crop,
-                                contentDescription = null
-                            )
-                            if (selectedImageUri != null){
-                                CustomButton(text = "select new image") {
-                                    photoPickerLauncher.launch(
-                                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                                    )
+                            ) {
+                                if (selectedImageUri != null){
+                                    CustomButton(text = "Upload image") {
+                                        viewModel.onEvent(MainScreenEvents.OnPostArtWorkClicked(selectedImageUri))
+                                    }
+                                } else {
+                                    CustomButton(text = "Pick image") {
+                                        photoPickerLauncher.launch(
+                                            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                                        )
+                                    }
+                                }
+                                AsyncImage(
+                                    modifier = Modifier
+                                        .padding(16.dp)
+                                        .clip(RoundedCornerShape(16.dp))
+                                    ,
+                                    model = selectedImageUri,
+                                    contentScale = ContentScale.Crop,
+                                    contentDescription = null
+                                )
+                                if (selectedImageUri != null){
+                                    CustomButton(text = "select new image") {
+                                        photoPickerLauncher.launch(
+                                            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                                        )
+                                    }
                                 }
                             }
                         }

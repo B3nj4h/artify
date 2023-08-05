@@ -48,8 +48,8 @@ class MainScreenViewModel @Inject constructor(
         getArtWork()
     }
 
-    private fun postArtWork(postArtModel: PostArtModel){
-        postArtWorkUseCase(postArtModel = postArtModel).onEach { result ->
+    private fun postArtWork(file: File){
+        postArtWorkUseCase(file).onEach { result ->
             when(result){
                 is Resource.Error -> {
                     _postArtWorkState.value = PostArtWorkState(error = result.message?:"")
@@ -98,17 +98,8 @@ class MainScreenViewModel @Inject constructor(
                 val imageFile = selectedImageUri?.path?.let { File(it) }
 
                 if (imageFile != null){
-                    val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
-                    val imagePart = MultipartBody.Part.createFormData("image", imageFile.name, requestFile)
                     postArtWork(
-                        PostArtModel(
-                            image_url = imagePart,
-                            name = RequestBody.create("text/plain".toMediaTypeOrNull(), "jhdakjhd"),
-                            price = RequestBody.create("text/plain".toMediaTypeOrNull(), "jhdakjhd"),
-                            contact = RequestBody.create("text/plain".toMediaTypeOrNull(), "jhdakjhd"),
-                            rating = RequestBody.create("text/plain".toMediaTypeOrNull(), "jhdakjhd"),
-                            description = RequestBody.create("text/plain".toMediaTypeOrNull(), "jhdakjhd")
-                        )
+                        file = imageFile
                     )
                 }
             }

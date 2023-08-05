@@ -13,7 +13,9 @@ import com.example.shelta.domain.model.UpdateEmail
 import com.example.shelta.domain.model.UpdateName
 import com.example.shelta.domain.model.UpdatePassword
 import com.example.shelta.domain.repository.Repository
-import retrofit2.http.Part
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
@@ -51,8 +53,15 @@ class RepositoryImpl @Inject constructor(
         return api.getArtWork()
     }
 
-    override suspend fun postArtWork(@Part postArtModel: PostArtModel): Message {
-        return api.postArtWork(postArtModel)
+    override suspend fun postArtWork(file: File): Message {
+        return api.postArtWork(
+            image_url = MultipartBody.Part
+                .createFormData(
+                    "image",
+                    file.name,
+                    file.asRequestBody()
+                )
+        )
     }
 
     override suspend fun getArtWorkDetails(id: Int): ArtDto {

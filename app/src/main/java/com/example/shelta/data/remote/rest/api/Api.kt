@@ -10,6 +10,8 @@ import com.example.shelta.domain.model.UpdateContact
 import com.example.shelta.domain.model.UpdateEmail
 import com.example.shelta.domain.model.UpdateName
 import com.example.shelta.domain.model.UpdatePassword
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
@@ -62,7 +64,7 @@ interface Api {
     @Multipart
     @POST("artwork")
     suspend fun postArtWork(
-        @Part postArtModel: PostArtModel
+        @Part image_url: MultipartBody.Part,
     ): Message
 
     @GET("artwork/{id}")

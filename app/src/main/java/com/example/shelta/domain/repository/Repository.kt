@@ -12,6 +12,7 @@ import com.example.shelta.domain.model.UpdateEmail
 import com.example.shelta.domain.model.UpdateName
 import com.example.shelta.domain.model.UpdatePassword
 import retrofit2.http.Part
+import java.io.File
 
 interface Repository {
     suspend fun updateName(id:Int, updateName: UpdateName) : Message
@@ -22,7 +23,7 @@ interface Repository {
     suspend fun getUser(): ProfileUserDto
     suspend fun resetPassword(resetModel: ResetModel): Message
     suspend fun getArtWork(): List<ArtDto>
-    suspend fun postArtWork(@Part postArtModel: PostArtModel): Message
+    suspend fun postArtWork(file: File): Message
     suspend fun getArtWorkDetails(id: Int): ArtDto
     suspend fun searchArtWork(name: String): List<ArtDto>
 }
