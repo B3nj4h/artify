@@ -100,7 +100,7 @@ class MainScreenViewModel @Inject constructor(
             is MainScreenEvents.OnPostArtWorkClicked -> {
                 imagePart?.let {
                     PostArtModel(
-                        image = it,
+                        image_url = it,
                         name = "",
                         price = "",
                         contact = "",
