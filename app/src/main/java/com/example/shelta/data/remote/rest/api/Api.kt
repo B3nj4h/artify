@@ -12,7 +12,9 @@ import com.example.shelta.domain.model.UpdateName
 import com.example.shelta.domain.model.UpdatePassword
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface Api {
@@ -57,9 +59,10 @@ interface Api {
     @GET("artwork")
     suspend fun getArtWork(): List<ArtDto>
 
+    @Multipart
     @POST("artwork")
     suspend fun postArtWork(
-        @Body postArtModel: PostArtModel
+        @Part postArtModel: PostArtModel
     ): Message
 
     @GET("artwork/{id}")

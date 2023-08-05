@@ -1,8 +1,10 @@
 package com.example.shelta.presentation.main
 
+import android.net.Uri
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,6 +20,11 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,6 +32,11 @@ class MainScreenViewModel @Inject constructor(
     private val getArtWorkUseCase: GetArtWorkUseCase,
     private val postArtWorkUseCase: PostArtWorkUseCase
 ): ViewModel() {
+    var selectedImageUri by mutableStateOf(mutableStateOf<Uri?>(null))
+    private val imageFile = selectedImageUri.value?.path?.let { File(it) }
+    private val requestFile = imageFile?.let { RequestBody.create("image/*".toMediaTypeOrNull(), it) }
+    val imagePart = requestFile?.let { MultipartBody.Part.createFormData("image", imageFile?.name, it) }
+
     var isUploadClicked by mutableStateOf(true)
 
     private val _uiEvent = Channel<UiEvent>()
@@ -84,6 +96,22 @@ class MainScreenViewModel @Inject constructor(
             }
             is MainScreenEvents.OnUploadClicked -> {
                 isUploadClicked = mainScreenEvents.onCLick
+            }
+            is MainScreenEvents.OnPostArtWorkClicked -> {
+                imagePart?.let {
+                    PostArtModel(
+                        image = it,
+                        name = "",
+                        price = "",
+                        contact = "",
+                        rating = "",
+                        description = ""
+                    )
+                }?.let {
+                    postArtWork(
+                        it
+                    )
+                }
             }
         }
     }

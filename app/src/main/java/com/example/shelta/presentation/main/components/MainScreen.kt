@@ -66,9 +66,8 @@ fun MainScreen(
     sendViewModel: SendFeedbackViewModel = hiltViewModel(),
     viewModel: MainScreenViewModel = hiltViewModel()
 ) {
-    var selectedImageUri by remember {
-        mutableStateOf<Uri?>(null)
-    }
+    var selectedImageUri = viewModel.selectedImageUri.value
+
     val photoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri -> selectedImageUri = uri}
