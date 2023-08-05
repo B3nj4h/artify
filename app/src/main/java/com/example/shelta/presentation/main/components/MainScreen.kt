@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.rounded.Upload
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -34,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -111,7 +114,7 @@ fun MainScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/ }) {
+            FloatingActionButton(onClick = { viewModel.isUploadClicked = !viewModel.isUploadClicked }) {
                 Icon(imageVector = Icons.Rounded.Upload, contentDescription = "upload")
             }
         }
@@ -128,6 +131,41 @@ fun MainScreen(
                         imageVector = Icons.Default.Refresh, contentDescription = "refresh icon"
                     )
                 }
+                if (viewModel.isUploadClicked){
+                    Dialog(
+                        onDismissRequest = { viewModel.onEvent(MainScreenEvents.OnUploadClicked(false)) }
+                    ) {
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(500.dp)
+                                .padding(20.dp)
+                            ,
+                        ) {
+                            if (selectedImageUri != null){
+                                CustomButton(text = "Upload image") {
+                                    photoPickerLauncher.launch(
+                                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                                    )
+                                }
+                            } else {
+                                CustomButton(text = "Pick image") {
+                                    photoPickerLauncher.launch(
+                                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                                    )
+                                }
+                            }
+                            AsyncImage(
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                ,
+                                model = selectedImageUri,
+                                contentScale = ContentScale.Crop,
+                                contentDescription = null
+                            )
+                        }
+                    }
+                }
             } else if (artModels.isLoading){
 //                val lottieCompositionSpec by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(
 //                    com.example.kinetic.R.raw.gaming))
@@ -137,24 +175,7 @@ fun MainScreen(
 //                    alignment = Alignment.Center
 //                )
             } else if (viewModel.isUploadClicked){
-                Dialog(
-                    onDismissRequest = { viewModel.onEvent(MainScreenEvents.OnUploadClicked(false)) }
-                ) {
-                    Card {
-                        Column {
-                            AsyncImage(
-                                model = selectedImageUri,
-                                contentScale = ContentScale.Crop,
-                                contentDescription = null
-                            )
-                            CustomButton(text = "Pick image") {
-                                photoPickerLauncher.launch(
-                                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                                )
-                            }
-                        }
-                    }
-                }
+
             } else {
                 LazyColumn(){
                     item {
