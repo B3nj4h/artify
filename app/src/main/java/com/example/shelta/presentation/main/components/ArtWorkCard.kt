@@ -39,7 +39,7 @@ fun ArtWorkCard(
     name: String,
     price: String,
     imageUrl: String,
-    rating: Int,
+    rating: String,
     onclick: () -> Unit
 ) {
     Card(
