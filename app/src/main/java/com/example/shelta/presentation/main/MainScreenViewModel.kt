@@ -32,10 +32,6 @@ class MainScreenViewModel @Inject constructor(
     private val getArtWorkUseCase: GetArtWorkUseCase,
     private val postArtWorkUseCase: PostArtWorkUseCase
 ): ViewModel() {
-    var selectedImageUri by mutableStateOf(mutableStateOf<Uri?>(null))
-    private val imageFile = selectedImageUri.value?.path?.let { File(it) }
-    private val requestFile = imageFile?.let { RequestBody.create("image/*".toMediaTypeOrNull(), it) }
-    val imagePart = requestFile?.let { MultipartBody.Part.createFormData("image", imageFile?.name, it) }
 
     var isUploadClicked by mutableStateOf(true)
 
@@ -52,7 +48,7 @@ class MainScreenViewModel @Inject constructor(
         getArtWork()
     }
 
-    fun postArtWork(postArtModel: PostArtModel){
+    private fun postArtWork(postArtModel: PostArtModel){
         postArtWorkUseCase(postArtModel = postArtModel).onEach { result ->
             when(result){
                 is Resource.Error -> {
@@ -98,18 +94,21 @@ class MainScreenViewModel @Inject constructor(
                 isUploadClicked = mainScreenEvents.onCLick
             }
             is MainScreenEvents.OnPostArtWorkClicked -> {
-                imagePart?.let {
-                    PostArtModel(
-                        image_url = it,
-                        name = "",
-                        price = "",
-                        contact = "",
-                        rating = "",
-                        description = ""
-                    )
-                }?.let {
+                val selectedImageUri = mainScreenEvents.selectedImageUri
+                val imageFile = selectedImageUri?.path?.let { File(it) }
+
+                if (imageFile != null){
+                    val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), imageFile)
+                    val imagePart = MultipartBody.Part.createFormData("image", imageFile.name, requestFile)
                     postArtWork(
-                        it
+                        PostArtModel(
+                            image_url = imagePart,
+                            name = "nam",
+                            price = "prorot",
+                            contact = "dfnjdfjfd",
+                            rating = "sdjsfjkfs",
+                            description = "sffjsfjks"
+                        )
                     )
                 }
             }

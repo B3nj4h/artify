@@ -2,6 +2,7 @@ package com.example.shelta.presentation.main.components
 
 import android.annotation.SuppressLint
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -66,8 +67,9 @@ fun MainScreen(
     sendViewModel: SendFeedbackViewModel = hiltViewModel(),
     viewModel: MainScreenViewModel = hiltViewModel()
 ) {
-    var selectedImageUri = viewModel.selectedImageUri.value
-
+    var selectedImageUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
     val photoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri -> selectedImageUri = uri}
@@ -148,6 +150,7 @@ fun MainScreen(
                                     photoPickerLauncher.launch(
                                         PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
                                     )
+                                    viewModel.onEvent(MainScreenEvents.OnPostArtWorkClicked(selectedImageUri))
                                 }
                             } else {
                                 CustomButton(text = "Pick image") {
