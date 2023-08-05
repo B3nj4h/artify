@@ -1,6 +1,7 @@
 package com.example.shelta.presentation.main.components
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -33,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.shelta.presentation.auth.login.components.CustomButton
 import com.example.shelta.presentation.auth.login.components.CustomTextField
 import com.example.shelta.presentation.main.MainScreenEvents
 import com.example.shelta.presentation.main.MainScreenViewModel
@@ -50,6 +56,9 @@ fun MainScreen(
     sendViewModel: SendFeedbackViewModel = hiltViewModel(),
     viewModel: MainScreenViewModel = hiltViewModel()
 ) {
+    var selectedImageUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
     val context = LocalContext.current
     val artModels = viewModel.state.value
 
@@ -124,13 +133,9 @@ fun MainScreen(
                 ) {
                     Card {
                         Column {
-                            CustomTextField(
-                                onClick = { /*TODO*/ },
-                                value = ,
-                                onValueChange = ,
-                                leadingIcon = 
-                            ) {
-                                
+                            AsyncImage()
+                            CustomButton(text = "Pick image") {
+
                             }
                         }
                     }

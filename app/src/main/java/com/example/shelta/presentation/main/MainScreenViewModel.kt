@@ -33,6 +33,9 @@ class MainScreenViewModel @Inject constructor(
     private val _state = mutableStateOf(MainScreenState())
     val state: State<MainScreenState> = _state
 
+    private val _postArtWorkState = mutableStateOf(PostArtWorkState())
+    val postArtWorkState: State<PostArtWorkState> = _postArtWorkState
+
     init {
         getArtWork()
     }
@@ -41,14 +44,14 @@ class MainScreenViewModel @Inject constructor(
         postArtWorkUseCase(postArtModel = postArtModel).onEach { result ->
             when(result){
                 is Resource.Error -> {
-                    _state.value = MainScreenState(message = result.message?:"")
+                    _postArtWorkState.value = PostArtWorkState(error = result.message?:"")
                     sendUiEvent(UiEvent.ShowToast(result.message?:"unknown error occurred"))
                 }
                 is Resource.Loading -> {
-                    _state.value = MainScreenState(isLoading = true)
+                    _postArtWorkState.value = PostArtWorkState(isLoading = true)
                 }
                 is Resource.Success -> {
-                    _state.value = MainScreenState(artModels = result.data ?: emptyList())
+                    _postArtWorkState.value = PostArtWorkState(message = result.data)
                 }
             }
         }.launchIn(viewModelScope)
