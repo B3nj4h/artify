@@ -33,7 +33,7 @@ class MainScreenViewModel @Inject constructor(
     private val postArtWorkUseCase: PostArtWorkUseCase
 ): ViewModel() {
 
-    var isUploadClicked by mutableStateOf(true)
+    var isUploadClicked by mutableStateOf(false)
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()

@@ -18,7 +18,7 @@ class GetArtWorkDetailsUseCase @Inject constructor(
     operator fun invoke(id: String): Flow<Resource<ArtModel>> = flow {
         try {
             emit(Resource.Loading())
-            val artWorkDetails = repository.getArtWorkDetails(id.toInt()).toArtModel()
+            val artWorkDetails = repository.getArtWorkDetails(id.toInt()).first().toArtModel()
             emit(Resource.Success(artWorkDetails))
         } catch (e: HttpException){
             emit(Resource.Error(e.localizedMessage ?: "Unexpected error occurred"))

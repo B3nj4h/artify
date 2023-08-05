@@ -162,16 +162,15 @@ fun ArtDetailsScreen(
                                         color = MaterialTheme.colorScheme.background
                                     )
                             ) {
-                                state.artModel?.let { it1 ->
-                                    Text(
-                                        text = it1.name,
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 30.sp,
-                                        color = MaterialTheme.colorScheme.tertiary
-                                    )
-                                }
-                                Spacer(modifier = Modifier.height(5.dp))
                                 Row {
+                                    state.artModel?.let { it1 ->
+                                        Text(
+                                            text = it1.name,
+                                            fontWeight = FontWeight.Bold,
+                                            fontSize = 30.sp,
+                                            color = MaterialTheme.colorScheme.tertiary
+                                        )
+                                    }
                                     Spacer(modifier = Modifier.weight(1f))
                                     Column() {
                                         state.artModel?.price.let {
@@ -186,7 +185,7 @@ fun ArtDetailsScreen(
                                 Spacer(modifier = Modifier.height(5.dp))
                                 Column() {
                                     Text(
-                                        text = "Game Publisher",
+                                        text = "Contact",
                                         color = MaterialTheme.colorScheme.tertiary,
                                         fontSize = 25.sp,
                                         fontWeight = FontWeight.Bold
@@ -208,7 +207,7 @@ fun ArtDetailsScreen(
                                 Spacer(modifier = Modifier.height(5.dp))
                                 Column() {
                                     Text(
-                                        text = "Game Details",
+                                        text = "Description",
                                         color = MaterialTheme.colorScheme.tertiary,
                                         fontSize = 25.sp,
                                         fontWeight = FontWeight.Bold

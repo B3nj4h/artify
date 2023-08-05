@@ -145,8 +145,6 @@ fun MainScreen(
 //                    iterations = Int.MAX_VALUE,
 //                    alignment = Alignment.Center
 //                )
-            } else if (viewModel.isUploadClicked){
-
             } else {
                 LazyColumn(){
                     item {
@@ -165,13 +163,13 @@ fun MainScreen(
                             ,
                         ) {
                             Text(
-                                text = "Republic of",
+                                text = "Welcome to ",
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 35.sp,
                                 color = MaterialTheme.colorScheme.tertiary
                             )
                             Text(
-                                text = "Gamers",
+                                text = "Artify",
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 35.sp,
                                 color = MaterialTheme.colorScheme.tertiary

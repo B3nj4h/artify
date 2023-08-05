@@ -73,7 +73,7 @@ fun SearchBar(
                         Text(
                             color = MaterialTheme.colorScheme.tertiary,
                             modifier = Modifier.alpha(0.5f),
-                            text = "search game here ....")},
+                            text = "search art work here ....")},
                     singleLine = true,
                     leadingIcon = {
                         IconButton(

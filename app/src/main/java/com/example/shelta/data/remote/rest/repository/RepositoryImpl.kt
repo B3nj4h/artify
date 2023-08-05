@@ -64,7 +64,7 @@ class RepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getArtWorkDetails(id: Int): ArtDto {
+    override suspend fun getArtWorkDetails(id: Int): List<ArtDto> {
         return api.getArtWorkDetails(id)
     }
 

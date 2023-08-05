@@ -24,6 +24,6 @@ interface Repository {
     suspend fun resetPassword(resetModel: ResetModel): Message
     suspend fun getArtWork(): List<ArtDto>
     suspend fun postArtWork(file: File): Message
-    suspend fun getArtWorkDetails(id: Int): ArtDto
+    suspend fun getArtWorkDetails(id: Int): List<ArtDto>
     suspend fun searchArtWork(name: String): List<ArtDto>
 }

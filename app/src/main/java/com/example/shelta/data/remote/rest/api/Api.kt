@@ -70,7 +70,7 @@ interface Api {
     @GET("artwork/{id}")
     suspend fun getArtWorkDetails(
         @Path("id") id: Int,
-    ): ArtDto
+    ): List<ArtDto>
 
     @GET("artwork/{name}")
     suspend fun getArtWorkByName(
