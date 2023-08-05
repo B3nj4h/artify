@@ -7,5 +7,5 @@ data class ArtModel(
     val price: String,
     val contact: String,
     val image_url: String,
-    val rating: Int
+    val rating: String
 )
