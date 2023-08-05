@@ -3,6 +3,9 @@ package com.example.shelta.presentation.main.components
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -38,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
 import com.example.shelta.presentation.auth.login.components.CustomButton
 import com.example.shelta.presentation.auth.login.components.CustomTextField
 import com.example.shelta.presentation.main.MainScreenEvents
@@ -59,6 +64,10 @@ fun MainScreen(
     var selectedImageUri by remember {
         mutableStateOf<Uri?>(null)
     }
+    val photoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri -> selectedImageUri = uri}
+    )
     val context = LocalContext.current
     val artModels = viewModel.state.value
 
@@ -133,9 +142,15 @@ fun MainScreen(
                 ) {
                     Card {
                         Column {
-                            AsyncImage()
+                            AsyncImage(
+                                model = selectedImageUri,
+                                contentScale = ContentScale.Crop,
+                                contentDescription = null
+                            )
                             CustomButton(text = "Pick image") {
-
+                                photoPickerLauncher.launch(
+                                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                                )
                             }
                         }
                     }
