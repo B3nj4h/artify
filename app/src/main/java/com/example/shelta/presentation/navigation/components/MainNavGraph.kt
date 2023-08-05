@@ -29,7 +29,7 @@ fun MainNavGraph(
 ) {
     AnimatedNavHost(
         navController = navHostController,
-        startDestination = Screens.MainScreen.route
+        startDestination = Screens.LoadScreen.route
     ){
         composable( route = Screens.LoadScreen.route ){ LoadScreen(navHostController) }
 
