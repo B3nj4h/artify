@@ -163,6 +163,13 @@ fun MainScreen(
                                 contentScale = ContentScale.Crop,
                                 contentDescription = null
                             )
+                            if (selectedImageUri != null){
+                                CustomButton(text = "select new image") {
+                                    photoPickerLauncher.launch(
+                                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                                    )
+                                }
+                            }
                         }
                     }
                 }
