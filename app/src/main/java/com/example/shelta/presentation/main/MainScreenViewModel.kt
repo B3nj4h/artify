@@ -103,11 +103,11 @@ class MainScreenViewModel @Inject constructor(
                     postArtWork(
                         PostArtModel(
                             image_url = imagePart,
-                            name = "nam",
-                            price = "prorot",
-                            contact = "dfnjdfjfd",
-                            rating = "sdjsfjkfs",
-                            description = "sffjsfjks"
+                            name = RequestBody.create("text/plain".toMediaTypeOrNull(), "jhdakjhd"),
+                            price = RequestBody.create("text/plain".toMediaTypeOrNull(), "jhdakjhd"),
+                            contact = RequestBody.create("text/plain".toMediaTypeOrNull(), "jhdakjhd"),
+                            rating = RequestBody.create("text/plain".toMediaTypeOrNull(), "jhdakjhd"),
+                            description = RequestBody.create("text/plain".toMediaTypeOrNull(), "jhdakjhd")
                         )
                     )
                 }

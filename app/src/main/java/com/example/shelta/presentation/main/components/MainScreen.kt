@@ -147,9 +147,6 @@ fun MainScreen(
                         ) {
                             if (selectedImageUri != null){
                                 CustomButton(text = "Upload image") {
-                                    photoPickerLauncher.launch(
-                                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                                    )
                                     viewModel.onEvent(MainScreenEvents.OnPostArtWorkClicked(selectedImageUri))
                                 }
                             } else {

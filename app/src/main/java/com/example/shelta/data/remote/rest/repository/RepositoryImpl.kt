@@ -13,6 +13,7 @@ import com.example.shelta.domain.model.UpdateEmail
 import com.example.shelta.domain.model.UpdateName
 import com.example.shelta.domain.model.UpdatePassword
 import com.example.shelta.domain.repository.Repository
+import retrofit2.http.Part
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
@@ -50,7 +51,7 @@ class RepositoryImpl @Inject constructor(
         return api.getArtWork()
     }
 
-    override suspend fun postArtWork(postArtModel: PostArtModel): Message {
+    override suspend fun postArtWork(@Part postArtModel: PostArtModel): Message {
         return api.postArtWork(postArtModel)
     }
 
