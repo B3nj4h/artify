@@ -136,52 +136,8 @@ fun MainScreen(
                         imageVector = Icons.Default.Refresh, contentDescription = "refresh icon"
                     )
                 }
-                if (viewModel.isUploadClicked){
-                    Dialog(
-                        onDismissRequest = { viewModel.onEvent(MainScreenEvents.OnUploadClicked(false)) }
-                    ) {
-                        if (viewModel.postArtWorkState.value.isLoading){
-                            CircularProgressIndicator()
-                        } else {
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(700.dp)
-                                    .padding(20.dp)
-                                ,
-                            ) {
-                                if (selectedImageUri != null){
-                                    CustomButton(text = "Upload image") {
-                                        viewModel.onEvent(MainScreenEvents.OnPostArtWorkClicked(selectedImageUri))
-                                    }
-                                } else {
-                                    CustomButton(text = "Pick image") {
-                                        photoPickerLauncher.launch(
-                                            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                                        )
-                                    }
-                                }
-                                AsyncImage(
-                                    modifier = Modifier
-                                        .padding(16.dp)
-                                        .clip(RoundedCornerShape(16.dp))
-                                    ,
-                                    model = selectedImageUri,
-                                    contentScale = ContentScale.Crop,
-                                    contentDescription = null
-                                )
-                                if (selectedImageUri != null){
-                                    CustomButton(text = "select new image") {
-                                        photoPickerLauncher.launch(
-                                            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             } else if (artModels.isLoading){
+                CircularProgressIndicator()
 //                val lottieCompositionSpec by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(
 //                    com.example.kinetic.R.raw.gaming))
 //                LottieAnimation(
@@ -195,7 +151,7 @@ fun MainScreen(
                 LazyColumn(){
                     item {
                         Column(
-                            modifier = Modifier.height(50.dp)
+                            modifier = Modifier.height(it.calculateTopPadding())
                         ) {
 
                         }
@@ -236,6 +192,51 @@ fun MainScreen(
                     }
                     item {
                         Spacer(modifier = Modifier.height(100.dp))
+                    }
+                }
+            }
+        }
+        if(viewModel.isUploadClicked){
+            Dialog(
+                onDismissRequest = { viewModel.onEvent(MainScreenEvents.OnUploadClicked(false)) }
+            ) {
+                if (viewModel.postArtWorkState.value.isLoading){
+                    CircularProgressIndicator()
+                } else {
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(700.dp)
+                            .padding(20.dp)
+                        ,
+                    ) {
+                        if (selectedImageUri != null){
+                            CustomButton(text = "Upload image") {
+                                viewModel.onEvent(MainScreenEvents.OnPostArtWorkClicked(selectedImageUri))
+                            }
+                        } else {
+                            CustomButton(text = "Pick image") {
+                                photoPickerLauncher.launch(
+                                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                                )
+                            }
+                        }
+                        AsyncImage(
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .clip(RoundedCornerShape(16.dp))
+                            ,
+                            model = selectedImageUri,
+                            contentScale = ContentScale.Crop,
+                            contentDescription = null
+                        )
+                        if (selectedImageUri != null){
+                            CustomButton(text = "select new image") {
+                                photoPickerLauncher.launch(
+                                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                                )
+                            }
+                        }
                     }
                 }
             }
