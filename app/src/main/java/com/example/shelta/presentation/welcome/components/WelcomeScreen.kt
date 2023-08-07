@@ -78,8 +78,7 @@ fun WelcomeScreen(
                 )
                 Image(
                     modifier = Modifier.height(400.dp)
-                        .clip(RoundedCornerShape(16.dp))
-                    ,
+                        .clip(RoundedCornerShape(16.dp)),
                     painter = painterResource(id = R.drawable.welcome),
                     contentDescription = "logo")
                 CustomButton(text = "Get started") {
