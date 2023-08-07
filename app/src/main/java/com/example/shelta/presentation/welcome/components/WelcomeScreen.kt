@@ -76,13 +76,6 @@ fun WelcomeScreen(
                     fontSize = 40.sp,
                     fontFamily = FontFamily.Monospace
                 )
-//                Card(
-//                    modifier = Modifier
-//                        .fillMaxHeight(0.5f)
-//                        .fillMaxWidth(),
-//                ) {
-//
-//                }
                 Image(
                     modifier = Modifier.height(400.dp)
                         .clip(RoundedCornerShape(16.dp))
