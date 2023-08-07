@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -32,6 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
 import com.example.shelta.R
 import com.example.shelta.presentation.auth.login.components.CustomButton
 import com.example.shelta.presentation.uievent.UiEvent
@@ -74,17 +76,19 @@ fun WelcomeScreen(
                     fontSize = 40.sp,
                     fontFamily = FontFamily.Monospace
                 )
-                Card(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(30.dp))
-                        .fillMaxHeight(0.6f)
-                        .fillMaxWidth(),
-                ) {
-                    Image(
-                        modifier = Modifier.fillMaxSize(),
-                        painter = painterResource(id = R.drawable.welcome),
-                        contentDescription = "logo")
-                }
+//                Card(
+//                    modifier = Modifier
+//                        .fillMaxHeight(0.5f)
+//                        .fillMaxWidth(),
+//                ) {
+//
+//                }
+                Image(
+                    modifier = Modifier.height(400.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                    ,
+                    painter = painterResource(id = R.drawable.welcome),
+                    contentDescription = "logo")
                 CustomButton(text = "Get started") {
                     viewModel.onEvent(WelcomeScreenEvents.OnRegisterClicked)
                 }
